@@ -54,26 +54,26 @@ SECRET_KEY=pick_any_long_random_string_here (or use a secret key generator)
 
 There are 2 ways this can be done:
 
-    > If using an IDE such as VS code, open the command Pallete (should be ctrl+shift+p) or open the bar up top that allows you to search. Type ">" and search (or select) "Python: Create Environment". Select "venv" and select the python version 3.12 (you will need to install python 3.12 from the internet first)
+> If using an IDE such as VS code, open the command Pallete (should be ctrl+shift+p) or open the bar up top that allows you to search. Type ">" and search (or select) "Python: Create Environment". Select "venv" and select the python version 3.12 (you will need to install python 3.12 from the internet first)
 
-    > Another way is to open your terminal and type:
+> Another way is to open your terminal and type:
 
-      ```bash
-      python3 -m venv venv
-      ```
-      
-      Activate it:
-      
-      - **macOS / Linux**: `source venv/bin/activate`
-      - **Windows (CMD)**: `venv\Scripts\activate.bat`
-      - **Windows (PowerShell)**: `venv\Scripts\Activate.ps1`
-      
-      Install dependencies:
-      
-      ```bash
-      cd backend
-      pip install -r requirements.txt
-      ```
+  ```bash
+  python3 -m venv venv
+  ```
+  
+  Activate it:
+  
+  - **macOS / Linux**: `source venv/bin/activate`
+  - **Windows (CMD)**: `venv\Scripts\activate.bat`
+  - **Windows (PowerShell)**: `venv\Scripts\Activate.ps1`
+  
+  Install dependencies:
+  
+  ```bash
+  cd backend
+  pip install -r requirements.txt
+  ```
 
 4. Running the App with Docker
 From the **root of the project** (where `docker-compose.yml` is), open your terminal and type:
@@ -88,7 +88,7 @@ This will:
 3. Build the React frontend image
 4. Start all three containers and link them together
  
-First run takes a few minutes while Docker downloads and builds everything. You only need to do this once unless you install new modules into the backend or frontend.
+First run takes a few minutes while Docker downloads and builds everything. You only need to do this once unless you install new modules into the backend or frontend, change the env file, or edit any docker files.
 
 Whenever you want to start the project up (without rebuilding the docker containers) just run:
 
