@@ -177,7 +177,7 @@ Useful psql commands:
 - `\d table_name` — describe a table
 - `\q` — quit
 
-You can also use an app like **DBeaver** to edit and see data inside your local database a lot easier. 
+  You can also use an app like **DBeaver** to edit and see data inside your local database a lot easier rather than using the docker commands. 
 ---
  
 ## Contributing
