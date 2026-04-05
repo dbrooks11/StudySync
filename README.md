@@ -123,23 +123,24 @@ Since this is all local, docker uses actual space on your computer to run these 
 
 ## Common Issues
  
-**Port already in use**
+**Port already in use**: 
 If you see an error like `port 5432 is already allocated`, you have PostgreSQL running locally on your machine. Either stop it or change the port in `docker-compose.yml`:
 ```yaml
 ports:
   - "5432:5432"   # use 5432 on your machine instead
 ```
  
-**Docker Desktop not running**
+**Docker Desktop not running**: 
 If `docker compose up` throws a connection error, make sure Docker Desktop is open and fully started (not still loading).
  
-**Changes not reflecting**
+**Changes not reflecting**: 
 The backend and frontend volumes are mounted live, so code changes should reflect immediately. If they don't, restart the containers:
 
 ```bash
 docker compose restart
 ```
 
+**Individual services failing**: 
 You can also restart individual services incase they fail. For example, the frontend and backend automatically refresh for you when making code changes. If the frontend stops refreshing for some reason, you can do:
 
 ```bash
@@ -148,6 +149,7 @@ docker compose restart frontend
 
 You can do the same for other services (the names of the services are in the `docker-compose.yml` file)
 
+**Zombie ports**: 
 There can be some instances where the issue lies directly in the port used. For example, the frontend runs on port 5173. When the browser hot reloads, sometimes the port can become "zombified". Use `npx kill port` command (make sure youre in directory where the port applies, if possible. You may or may not also need to install this package) then restart the docker container for that service.
 
 ```bash
