@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from config import config_dict
 from flask_cors import CORS
+from db import init_db, init_pool
 
 
 
