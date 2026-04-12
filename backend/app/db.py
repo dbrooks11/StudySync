@@ -1,4 +1,3 @@
-
 import os
 
 import psycopg_pool
@@ -22,7 +21,7 @@ def init_db():
                     first_name TEXT NOT NULL,
                     last_name TEXT NOT NULL,
                     email TEXT UNIQUE NOT NULL,
-                    password_hash VARCHAR(255) NOT NULL,
+                    password_hash TEXT NOT NULL,
                     major TEXT,
                     gpa REAL,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -67,7 +66,7 @@ def init_db():
                 );
             """)
             cur.execute("""
-                CREATE TABLE IF NOT EXISTS Membership (
+                CREATE TABLE IF NOT EXISTS Participating (
                     student_id INTEGER REFERENCES Student(student_id) ON DELETE CASCADE,
                     group_id INTEGER REFERENCES StudyGroup(group_id) ON DELETE CASCADE,
                     joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

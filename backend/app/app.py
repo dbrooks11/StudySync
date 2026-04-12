@@ -1,11 +1,9 @@
 import os
 from flask import Flask
-from config import config_dict
+from .config import config_dict
 from flask_cors import CORS
-from db import init_db, init_pool
-
-
-
+from .db import init_db, init_pool
+from routes import auth_bp
 
 def create_app(config_name=None):
     if config_name is None:
@@ -13,6 +11,12 @@ def create_app(config_name=None):
 
     app = Flask(__name__)
     app.config.from_object(config_dict[config_name])
+    
+    #register each blueprint made
+    app.register_blueprint(auth_bp)
+
+    init_pool()
+    init_db()
 
     configure_security(app)
 
