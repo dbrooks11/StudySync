@@ -5,7 +5,7 @@ from flask_jwt_extended import (
     create_access_token,
     jwt_required,
     set_access_cookies,
-    unset_access_cookies
+    unset_jwt_cookies
 )
 
 auth_bp = Blueprint("auth",__name__, url_prefix="/auth")
@@ -62,9 +62,13 @@ def login():
         if not login:
             return jsonify({'error': 'Invalid email or password'}), 401
         
-        access = create_access_token(identity=login[0])
-        set_access_cookies(encoded_access_token=access)
-        return jsonify({'message':'Login Successful'}), 200
+        response = jsonify({
+            "message": "Login Successful"
+        })
+
+        access = create_access_token(identity=str(password_hash[0]))
+        set_access_cookies(response=response, encoded_access_token=access)
+        return response, 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
@@ -72,7 +76,10 @@ def login():
 @jwt_required()
 def logout():
     try:
-        unset_access_cookies()
-        return jsonify({'message': 'Logout Successful'}), 200
+        response = jsonify({
+            'message': 'Logout Successful'
+        })
+        unset_jwt_cookies(response)
+        return response, 200
     except Exception as e:
         return jsonify({'error': str(e)}), 200

@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from .config import config_dict
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 from .db import init_db, init_pool
 from routes import auth_bp
 
@@ -10,6 +11,7 @@ def create_app(config_name=None):
         config_name = os.getenv('FLASK_ENV', 'development')
 
     app = Flask(__name__)
+    jwt = JWTManager(app)
     app.config.from_object(config_dict[config_name])
     
     #register each blueprint made
