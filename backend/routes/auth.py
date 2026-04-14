@@ -1,6 +1,12 @@
 from app.db import pool
 from flask import Blueprint, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import (
+    create_access_token,
+    jwt_required,
+    set_access_cookies,
+    unset_access_cookies
+)
 
 auth_bp = Blueprint("auth",__name__, url_prefix="/auth")
 
@@ -30,7 +36,7 @@ def register():
                 if email_exist:
                     return jsonify({'error': 'Email already exist'}), 409
                 cur.execute("INSERT INTO student(first_name,last_name, email, password_hash, major, gpa) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, last_name, email, password_encrypted, major, gpa,))
-            
+        
         return jsonify({'message': 'Registration Successful'}), 201
     except ValueError:
         return jsonify({'error': 'GPA must be a number'}), 422
@@ -49,12 +55,24 @@ def login():
     try:
         with pool.connection() as conn:
             with conn.cursor() as cur:
-                password_hash = cur.execute('SELECT password_hash FROM student WHERE email = %s', (email,)).fetchone()
+                password_hash = cur.execute('SELECT student_id, password_hash FROM student WHERE email = %s', (email,)).fetchone()
 
-        login = check_password_hash(password_hash[0], password)
+        login = check_password_hash(password_hash[1], password)
 
         if not login:
             return jsonify({'error': 'Invalid email or password'}), 401
+        
+        access = create_access_token(identity=login[0])
+        set_access_cookies(encoded_access_token=access)
         return jsonify({'message':'Login Successful'}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@auth_bp.route('/logout', methods = ['POST'])
+@jwt_required()
+def logout():
+    try:
+        unset_access_cookies()
+        return jsonify({'message': 'Logout Successful'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 200
