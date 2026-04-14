@@ -11,7 +11,9 @@ def create_app(config_name=None):
         config_name = os.getenv('FLASK_ENV', 'development')
 
     app = Flask(__name__)
-    jwt = JWTManager(app)
+
+    JWTManager(app)
+    
     app.config.from_object(config_dict[config_name])
     
     #register each blueprint made
