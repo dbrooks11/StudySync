@@ -1,5 +1,10 @@
 from .auth import auth_bp
 
 
+routes = [
+    auth_bp,
+]
+
 def register_blueprints(app):
-    app.register_blueprint(auth_bp)
+    for route in routes:
+        app.register_blueprint(route)
