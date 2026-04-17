@@ -1,0 +1,48 @@
+h2 {
+    color: var(--text-h);
+}
+
+form {
+    font-size: 16px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 16px;
+    color: var(--text)
+}
+
+#auth-form {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 32px;
+}
+
+#auth-form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.auth-form-input{
+    display: flex;
+    justify-content: end;
+    gap: 16px;  
+}
+
+.auth-form-input > input {
+    border-radius: 4px;
+
+}
+
+#auth-form-button {
+    width: 40%;
+    height: 2.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#auth-form-button:hover {
+    background-color: rgb(115, 114, 114);
+}

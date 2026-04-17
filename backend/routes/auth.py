@@ -44,7 +44,7 @@ def register():
         return jsonify({'error': str(e)}), 500
 
 
-@auth_bp.route('/login', methods=['GET'])
+@auth_bp.route('/login', methods=['POST'])
 def login():
     email = request.form.get('email')
     password = request.form.get('password')
@@ -57,11 +57,9 @@ def login():
             with conn.cursor() as cur:
                 password_hash = cur.execute('SELECT student_id, password_hash FROM student WHERE email = %s', (email,)).fetchone()
 
-        login = check_password_hash(password_hash[1], password)
-
-        if not login:
+        if not password_hash or not check_password_hash(password_hash[1], password):
             return jsonify({'error': 'Invalid email or password'}), 401
-        
+   
         response = jsonify({
             "message": "Login Successful"
         })

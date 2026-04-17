@@ -1,16 +1,18 @@
 import { Route, Routes } from 'react-router'
 import Register from './pages/Register'
-import './App.css'
+import Login from './pages/Login'
+import './css/App.css'
 
-function App() {
+export default function App() {
 
   return (
     <>
       <Routes>
         <Route index element={<Register/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/profile' element={''}/> {/* TODO: will do profile page*/}
       </Routes>
     </>
   )
 }
 
-export default App
