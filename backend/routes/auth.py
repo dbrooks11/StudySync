@@ -82,4 +82,4 @@ def logout():
         unset_jwt_cookies(response)
         return response, 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 200
+        return jsonify({'error': str(e)}), 500
