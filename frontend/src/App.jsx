@@ -1,4 +1,21 @@
-import { useState } from 'react'
+import Navbar from './components/Navbar'
+import Dashboard from './components/Dashboard'
+import Button from './components/Button'
+
+function App() {
+  return (
+    <div>
+      <Navbar />
+      <Dashboard />
+      <h1>StudySync</h1>
+    </div>
+  )
+}
+
+export default App
+
+
+/*import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -118,4 +135,4 @@ function App() {
   )
 }
 
-export default App
+export default App*/
