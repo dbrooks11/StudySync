@@ -1,4 +1,4 @@
-export default function Sidebar({ side, open, options }) {
+export default function Sidebar({ side, open, options = [] }) {
   return (
     <div className={`sidebar ${side} ${open ? "open" : ""}`}>
       <ul>

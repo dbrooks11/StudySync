@@ -1,6 +1,8 @@
-import { Route, Routes } from 'react-router'
+import { Route, Routes } from 'react-router-dom'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Home from './pages/Home'
+
 import './css/App.css'
 
 export default function App() {

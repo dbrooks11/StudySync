@@ -4,6 +4,8 @@ import Sidebar from "../components/Sidebar";
 import CourseInput from "../components/CourseInput";
 import SuggestedGroups from "../components/SuggestedGroups";
 
+import "../css/Home.css";
+
 export default function Home(){
 
 const [leftOpen, setLeftOpen] = useState(false);

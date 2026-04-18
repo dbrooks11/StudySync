@@ -4,7 +4,7 @@ export default function Header({onLeftToggle, onRightToggle}){
             <button onClick={onLeftToggle}>☰</button>
 
             <div className="logo">
-                <img src="./assets/StudySyncLogo1" alt="StudySync Logo" />
+                <img src="src/assets/StudySyncLogo1.png" alt="StudySync Logo" />
             </div>
             
             <button onClick={onRightToggle}>☰</button>
