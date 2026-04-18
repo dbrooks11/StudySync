@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route index element={<Register/>}/>
+        <Route index element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/profile' element={''}/> {/* TODO: will do profile page*/}
       </Routes>
