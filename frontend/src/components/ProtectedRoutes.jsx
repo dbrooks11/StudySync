@@ -43,10 +43,6 @@ export default function ProtectedRoutes() {
                     route: "/courses"
                 },
                 {
-                    title: "Availability",
-                    route: "/availability"
-                },
-                {
                     title: "Profile",
                     route: "/profile"
                 }

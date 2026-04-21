@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CourseInput(){
+export default function Courses(){
     const [form, setForm] = useState({
         course_code: "",
         course_name: "",

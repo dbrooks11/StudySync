@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
+import Courses from './pages/Courses'
 import Profile from './pages/Profile'
-import CourseInput from './Components/Profile/CourseInput'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import ProtectedRoutes from './components/ProtectedRoutes'
@@ -18,7 +18,7 @@ export default function App() {
 
         <Route element={<ProtectedRoutes/>}>
           <Route path='/profile' element={<Profile/>}/> 
-          <Route path='/courses' element={<CourseInput/>}/>
+          <Route path='/courses' element={<Courses/>}/>
         </Route>
       </Routes>
     </>
