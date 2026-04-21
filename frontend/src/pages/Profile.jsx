@@ -46,17 +46,39 @@ useEffect(() => {
 
             <Sidebar 
             side="left" 
-            open={leftOpen} 
-            options={["Join Group",
-                    "Create Group",
-                    "Joined Groups"]}
+            open={leftOpen}
+            options = {[
+                {
+                    title: "Join Group",
+                    route: "/join-group"
+                },
+                {
+                    title: "Create Group",
+                    route: "/create-group"
+                },
+                {
+                    title: "Joined Groups",
+                    route: "/joined"
+                }
+            ]} 
             />
             <Sidebar 
             side="right" 
             open={rightOpen} 
-            options={["Enrolled courses",
-                    "Availability",
-                    "Profile"]}
+            options = {[
+                {
+                    title: "Enrolled courses",
+                    route: "/courses"
+                },
+                {
+                    title: "Availability",
+                    route: "/availability"
+                },
+                {
+                    title: "Profile",
+                    route: "/profile"
+                }
+            ]}
             />
 
             <main className="main">

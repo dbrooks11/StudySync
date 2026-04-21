@@ -101,11 +101,14 @@ export default function Availability({availabilities = [], setProfile}) {
             <div className='availabilities-container'>
                 {availabilities.map(availability => {
                     return(
-                        <div key={availability.avail_id}>
-                            <div className='availabilities'>
+                        <div key={availability.avail_id} className='availabilities'>
+                            <div>
                                 <span>{availability.day_of_week}</span>
-                                <span>{formatTime(availability.start_time)}</span>
-                                <span>{formatTime(availability.end_time)}</span>
+                                <div>
+                                    <span>{formatTime(availability.start_time)}</span>
+                                    <span>-</span>
+                                    <span>{formatTime(availability.end_time)}</span>
+                                </div>
                             </div>
                             <button 
                                 type='button' 
