@@ -32,10 +32,17 @@ def register():
 
         with pool.connection() as conn:
             with conn.cursor() as cur:
-                email_exist = cur.execute("SELECT student_id FROM student WHERE email = %s", (email,)).fetchone()
+                email_exist = cur.execute("""
+                                          SELECT student_id 
+                                          FROM student 
+                                          WHERE email = %s
+                                          """, (email,)).fetchone()
                 if email_exist:
                     return jsonify({'error': 'Email already exist'}), 409
-                cur.execute("INSERT INTO student(first_name,last_name, email, password_hash, major, gpa) VALUES(%s, %s, %s, %s, %s, %s)", (first_name, last_name, email, password_encrypted, major, gpa,))
+                cur.execute("""
+                            INSERT INTO student(first_name,last_name, email, password_hash, major, gpa) 
+                            VALUES(%s, %s, %s, %s, %s, %s)
+                            """, (first_name, last_name, email, password_encrypted, major, gpa,))
         
         return jsonify({'message': 'Registration Successful'}), 201
     except ValueError:
@@ -55,7 +62,11 @@ def login():
     try:
         with pool.connection() as conn:
             with conn.cursor() as cur:
-                password_hash = cur.execute('SELECT student_id, password_hash FROM student WHERE email = %s', (email,)).fetchone()
+                password_hash = cur.execute("""
+                                            SELECT student_id, password_hash 
+                                            FROM student 
+                                            WHERE email = %s
+                                            """, (email,)).fetchone()
 
         if not password_hash or not check_password_hash(password_hash[1], password):
             return jsonify({'error': 'Invalid email or password'}), 401

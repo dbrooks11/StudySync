@@ -4,6 +4,10 @@
   height: 100vh;
 }
 
+button {
+  cursor: pointer;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -24,6 +28,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 16px;
 }
 
 /* Sidebar base */
@@ -36,6 +41,7 @@
   color: white;
   transition: transform 0.3s ease;
 }
+
 
 /* Left sidebar */
 .sidebar.left {
@@ -57,7 +63,7 @@
   transform: translateX(0);
 }
 .logo img {
-  height: 100px;
+  height: 60px;
   width: auto;
 
 }
@@ -127,4 +133,52 @@
   background: var(--accent);
   color: white;
   cursor: pointer;
+}
+
+/* Profile student info */
+#info-container {
+  display: flex;
+  gap: 64px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 8px;
+}
+
+
+/* Availability Section */
+.avail-container {
+  color:white;
+}
+
+.avail-container .header {
+  display: flex;
+}
+
+.avail-form {
+  display: flex;
+  flex-direction: row;
+}
+
+.avail-form > div {
+  text-wrap-mode: nowrap;
+  display: flex;
+  gap: 8px;
+}
+.availabilities-container {
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+}
+
+
+.availabilities {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  padding: 8px;
+  background-color: rgb(79, 79, 79);
 }
