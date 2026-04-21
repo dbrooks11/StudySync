@@ -199,3 +199,25 @@ button {
   display: flex;
   gap: 8px;
 }
+
+
+/* Courses Page */
+
+.courses-container {
+  display: flex;
+  gap:32px;
+}
+
+.course {
+  display: flex;
+  gap:16px;
+}
+
+.course .top {
+  display: flex;
+}
+
+.course .bottom {
+  display: flex;
+  gap: 16px;
+}

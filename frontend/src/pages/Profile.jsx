@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import CourseInput from "../Components/Profile/CourseInput";
 import SuggestedGroups from "../components/Profile/SuggestedGroups";
 import Availability from "../components/Profile/Availability";
 import Info from "../components/Profile/Info";
@@ -26,9 +25,9 @@ useEffect(() => {
         }
         console.log(data.profile)
         setProfile(data.profile)
-    } catch(error){
-        console.log(error)
-    }
+        } catch(error){
+            console.log(error)
+        }
     }
 
     fetchProfile()
