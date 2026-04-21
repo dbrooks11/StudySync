@@ -9,9 +9,6 @@ import Info from "../components/Profile/Info";
 import "../css/Profile.css";
 
 export default function Profile(){
-
-const [leftOpen, setLeftOpen] = useState(false);
-const [rightOpen, setRightOpen] = useState(false);
 const [profile, setProfile] = useState({})
 
 useEffect(() => {
@@ -38,65 +35,21 @@ useEffect(() => {
 }, []);
 
     return(
-        <div className="app">
-            <Header
-                onLeftToggle={() => setLeftOpen(!leftOpen)}
-                onRightToggle={() => setRightOpen(!rightOpen)}
+        <main className="main">
+            {/* <CourseInput /> */}
+            <h1>Profile</h1>
+            <Info
+                firstName = {profile.info?.first_name}
+                lastName = {profile.info?.last_name}
+                email = {profile.info?.email}
+                major = {profile.info?.major}
+                gpa = {profile.info?.gpa}
             />
-
-            <Sidebar 
-            side="left" 
-            open={leftOpen}
-            options = {[
-                {
-                    title: "Join Group",
-                    route: "/join-group"
-                },
-                {
-                    title: "Create Group",
-                    route: "/create-group"
-                },
-                {
-                    title: "Joined Groups",
-                    route: "/joined"
-                }
-            ]} 
+            <Availability
+                availabilities={profile?.availability}
+                setProfile={setProfile}
             />
-            <Sidebar 
-            side="right" 
-            open={rightOpen} 
-            options = {[
-                {
-                    title: "Enrolled courses",
-                    route: "/courses"
-                },
-                {
-                    title: "Availability",
-                    route: "/availability"
-                },
-                {
-                    title: "Profile",
-                    route: "/profile"
-                }
-            ]}
-            />
-
-            <main className="main">
-                {/* <CourseInput /> */}
-                <h1>Profile</h1>
-                <Info
-                    firstName = {profile.info?.first_name}
-                    lastName = {profile.info?.last_name}
-                    email = {profile.info?.email}
-                    major = {profile.info?.major}
-                    gpa = {profile.info?.gpa}
-                />
-                <Availability
-                    availabilities={profile?.availability}
-                    setProfile={setProfile}
-                />
-                <SuggestedGroups />
-            </main>
-        </div>
+            <SuggestedGroups />
+        </main>
     );
 }
