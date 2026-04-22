@@ -118,13 +118,14 @@ def add_course_list():
     department = request.form.get('department', '').strip()
     credit_hours = request.form.get('credit_hours', '')
 
-    if credit_hours:
-        credit_hours = int(credit_hours)
-
-    if not course_code:
-        return jsonify({'error':'Invalid course data'}), 400
-
     try:
+        if credit_hours:
+            credit_hours = int(credit_hours)
+
+        if not course_code:
+            return jsonify({'error':'Invalid course data'}), 400
+
+    
         with pool.connection() as conn:
             with conn.cursor(row_factory=dict_row) as cur:
                 course_exist = cur.execute("""

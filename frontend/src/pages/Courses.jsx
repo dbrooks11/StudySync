@@ -102,7 +102,7 @@ export default function Courses(){
                 <h2>Don't see your course? Add it to the list then enroll!</h2>
                     <div className="course-grid">
                         <input
-                            placeholder="Course Code"
+                            placeholder="Course Code (ex. COP3330)"
                             name="course_code"
                         />
                         <input
