@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 import SuggestedGroups from "../components/Profile/SuggestedGroups";
 import Availability from "../components/Profile/Availability";
 import Info from "../components/Profile/Info";
@@ -35,6 +34,7 @@ useEffect(() => {
 
     return(
         <main className="main">
+            <div className="container">
             {/* <CourseInput /> */}
             <h1>Profile</h1>
             <Info
@@ -44,6 +44,7 @@ useEffect(() => {
                 major = {profile.info?.major}
                 gpa = {profile.info?.gpa}
             />
+            </div>
             <Availability
                 availabilities={profile?.availability}
                 setProfile={setProfile}

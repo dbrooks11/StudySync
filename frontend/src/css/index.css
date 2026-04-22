@@ -1,4 +1,4 @@
-:root {
+/*:root {
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -50,9 +50,46 @@
   }
 }
 
-/* * {
+ * {
   border: red solid 2px;
 } */
+
+:root {
+  /* === BASE COLORS === */
+  --bg: #000000;
+  --bg-card: #16171D;
+  --bg-hover: #313441;
+
+  /* === TEXT === */
+  --text: #79BEDF;
+  --text-h: #79BEDF;
+
+  /* === STRUCTURE === */
+  --border: #2A2D36;
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+  /* === BRAND COLORS === */
+  --primary-light: #2b2e38;
+  --primary: #16171D;
+  --primary-dark: #111216;   
+
+  /* === ACCENTS === */
+  --accent: #FBCC29;         /* amber */
+  --accent-soft: rgba(251, 204, 41, 0.15);
+
+  /* === SUPPORT === */
+  --success: #5B7553;        /* olive */
+
+  /* === UI === */
+  --code-bg: #1f2028;
+  --social-bg: rgba(47, 48, 58, 0.5);
+
+  font: 18px/145% var(--sans);
+  color: var(--text);
+  background: var(--bg);
+}
 
 body {
   margin: 0;

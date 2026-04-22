@@ -1,5 +1,4 @@
-import Sidebar from "./Sidebar"
-import Header from "./Header"
+import Navbar from "./Navbar"
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -7,19 +6,20 @@ import { Outlet } from "react-router-dom";
 export default function ProtectedRoutes() {
 
     const [leftOpen, setLeftOpen] = useState(false);
-    const [rightOpen, setRightOpen] = useState(false);
+
 
     return (
         <div className="app">
-            <Header
-                onLeftToggle={() => setLeftOpen(!leftOpen)}
-                onRightToggle={() => setRightOpen(!rightOpen)}
-            />
-
-            <Sidebar 
-            side="left" 
-            open={leftOpen}
+            <Navbar
             options = {[
+                {
+                    title: "Profile",
+                    route: "/profile"
+                },
+                {
+                    title: "Enrolled courses",
+                    route: "/courses"
+                },
                 {
                     title: "Join Group",
                     route: "/join-group"
@@ -33,20 +33,6 @@ export default function ProtectedRoutes() {
                     route: "/joined"
                 }
             ]} 
-            />
-            <Sidebar 
-            side="right" 
-            open={rightOpen} 
-            options = {[
-                {
-                    title: "Enrolled courses",
-                    route: "/courses"
-                },
-                {
-                    title: "Profile",
-                    route: "/profile"
-                }
-            ]}
             />
             <main className="main">
                 <Outlet/>
