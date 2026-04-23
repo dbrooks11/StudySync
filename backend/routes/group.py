@@ -27,6 +27,16 @@ def join_group(group_id):
                 
                 if not group_exist:
                     return jsonify({'error': 'This group does not exist'}), 404
+                
+                is_host = cur.execute("""
+                                      SELECT host_id 
+                                      FROM studygroup
+                                      WHERE host_id = %s 
+                                        AND group_id = %s
+                                    """, (id, group_id,)).fetchone()
+                
+                if is_host:
+                    return jsonify({'error': 'Can not join a group youre hosting'}), 409
         
                 cur.execute("""
                             INSERT INTO participating(student_id, group_id) 
