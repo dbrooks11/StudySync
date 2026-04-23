@@ -8,7 +8,7 @@ export default function Courses(){
     useEffect(() => {
         const getCourses = async() => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/profile/courses`, {
+                const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/courses/all`, {
                 credentials: "include",
                 method: "GET"
             })
@@ -18,7 +18,6 @@ export default function Courses(){
             if(!response.ok){
                 throw new Error(data)
             }
-            console.log(data)
 
             setCourseList(data.course_list)
             setEnrolledCourses(data.enrolled_courses)
@@ -33,7 +32,7 @@ export default function Courses(){
 
     const handleCourseListSubmit = async(formData) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/profile/course-list/add`, {
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/courses/course-list/add`, {
                 credentials: "include",
                 method: "POST",
                 body: formData
@@ -45,7 +44,6 @@ export default function Courses(){
                 throw new Error(data.error)
             }
 
-            console.log(data)
             setCourseList(data.course_list)
 
         }catch(error){
@@ -55,7 +53,7 @@ export default function Courses(){
 
     const enrollCourse = async(courseId, courseCode) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/profile/course/add`, {
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/courses/enroll`, {
                 credentials: "include",
                 headers: { 'Content-Type': 'application/json' },
                 method: "POST",
@@ -79,7 +77,7 @@ export default function Courses(){
 
     const deleteEnrolledCourse = async(courseId, courseCode) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/profile/course/delete/${courseId}/${courseCode}`, {
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/courses/enroll/delete/${courseId}/${courseCode}`, {
                 credentials: "include",
                 method: "DELETE"
             })

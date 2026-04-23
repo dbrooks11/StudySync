@@ -23,7 +23,6 @@ useEffect(() => {
         if(!response.ok){
             throw new Error(data)
         }
-        console.log(data.profile)
         setProfile(data.profile)
         } catch(error){
             console.log(error)

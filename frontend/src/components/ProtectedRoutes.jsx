@@ -27,10 +27,6 @@ export default function ProtectedRoutes() {
                 {
                     title: "Create Group",
                     route: "/create-group"
-                },
-                {
-                    title: "Joined Groups",
-                    route: "/joined"
                 }
             ]} 
             />
@@ -45,6 +41,10 @@ export default function ProtectedRoutes() {
                 {
                     title: "Profile",
                     route: "/profile"
+                },
+                {
+                    title: "My Groups",
+                    route: "/my-groups"
                 }
             ]}
             />
