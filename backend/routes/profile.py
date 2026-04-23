@@ -1,8 +1,9 @@
-from app.db import pool
 from datetime import datetime
-from psycopg.rows import dict_row
+
+from app.db import pool
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
+from psycopg.rows import dict_row
 
 profile_bp = Blueprint('profile', __name__ , url_prefix='/profile')
 

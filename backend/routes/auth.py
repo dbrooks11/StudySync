@@ -1,12 +1,12 @@
 from app.db import pool
 from flask import Blueprint, jsonify, request
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
     create_access_token,
     jwt_required,
     set_access_cookies,
-    unset_jwt_cookies
+    unset_jwt_cookies,
 )
+from werkzeug.security import check_password_hash, generate_password_hash
 
 auth_bp = Blueprint("auth",__name__, url_prefix="/auth")
 
