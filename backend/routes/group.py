@@ -62,6 +62,34 @@ def delete_group(group_id, course_id):
                                 'my_groups': my_groups}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+
+@group_bp.route('/leave/<int:group_id>', methods = ["DELETE"])
+@jwt_required()
+def leave_group(group_id):
+    id = get_jwt_identity()
+
+    try:
+        with pool.connection() as conn:
+            with conn.cursor(row_factory=dict_row) as cur:
+                cur.execute("""
+                            DELETE FROM participating
+                            WHERE student_id = %s 
+                                AND group_id = %s
+                            """, (id, group_id,))
+                
+                joined = cur.execute("""
+                                     SELECT sg.group_id, sg.course_id, sg.group_name, sg.location, sg.meeting_time, sg.max_size, c.course_name, c.course_code
+                                     FROM studygroup as sg
+                                     JOIN participating as p ON p.group_id = sg.group_id
+                                     JOIN course as c ON c.course_id = sg.course_id
+                                     WHERE p.student_id = %s
+                                     """, (id,)).fetchall()
+                
+                return jsonify({'message': 'Study Group left successfully',
+                                'joined_groups': joined}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 @group_bp.route('/me', methods = ["GET"])
@@ -73,9 +101,10 @@ def my_groups():
         with pool.connection() as conn:
             with conn.cursor(row_factory=dict_row) as cur:
                 groups = cur.execute("""
-                                    SELECT * 
-                                    FROM studygroup
-                                    WHERE host_id = %s
+                                    SELECT sg.group_id, sg.course_id, sg.group_name, sg.location, sg.meeting_time, sg.max_size, c.course_name, c.course_code
+                                    FROM studygroup as sg
+                                    JOIN course as c ON c.course_id = sg.course_id
+                                    WHERE sg.host_id = %s
                                     """, (id,)).fetchall()
                 
                 joined = cur.execute("""
