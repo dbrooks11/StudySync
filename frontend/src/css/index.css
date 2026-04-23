@@ -86,7 +86,7 @@
   --code-bg: #1f2028;
   --social-bg: rgba(47, 48, 58, 0.5);
 
-  font: 18px/145% var(--sans);
+  font: 18px/145% "Roboto";
   color: var(--text);
   background: var(--bg);
 }

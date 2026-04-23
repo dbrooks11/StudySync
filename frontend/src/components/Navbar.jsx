@@ -2,17 +2,13 @@ import {Link} from "react-router-dom"
 
 export default function Navbar({ options = [] }) {
   return (
-    <div>
+    <div className = "navbar">
       <header className="header">
-            
-
             <div className="logo-container">
                 <div className="logo">
                     <img src="src/assets/StudySyncLogo1.png" alt="StudySync Logo" />
                 </div>
             </div>
-            
-            
         </header>
       <div className="sidebar">
         <ul>

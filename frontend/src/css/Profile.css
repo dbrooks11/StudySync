@@ -24,6 +24,10 @@ button {
   box-sizing: border-box;
 }
 
+.navbar {
+  position: sticky;
+  top: 0;
+}
 
 .main {
   flex: 1;
@@ -37,7 +41,7 @@ button {
 /* Sidebar base */
 .sidebar {
   position: fixed;
-  top: 13%;
+  top: 124px;
   width: 250px;
   height: 100%;
   background: var(--primary);
@@ -63,11 +67,6 @@ button {
   width: auto;
   display: block;
 }
-/*.logo-container {
-  background: var(--primary-dark);
-  padding: 6px 10px;
-  border-radius: 8px;
-}*/
 
 
 #route {
@@ -140,6 +139,7 @@ button {
 /* Profile student info */
 #info-container {
   display: flex;
+  position: relative;
   gap: 64px;
   padding: 6px 10px;
   border-radius: 8px;
@@ -153,12 +153,27 @@ button {
   gap: 8px;
 }
 
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 30px;
+  right: 450px;
+  bottom: 5px;
+  background-attachment: fixed;
+  background-color: var(--primary);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
 
 /* Availability Section */
 .avail-container {
   background: var(--primary);
   padding: 6px 10px;
   border-radius: 8px;
+  position: relative;
+  left: px;
 }
 
 .avail-container .header {

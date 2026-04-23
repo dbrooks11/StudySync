@@ -34,7 +34,7 @@ useEffect(() => {
 
     return(
         <main className="main">
-            <div className="container">
+            <div className="profile-container">
             {/* <CourseInput /> */}
             <h1>Profile</h1>
             <Info
