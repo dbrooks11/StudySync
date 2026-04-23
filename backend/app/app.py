@@ -1,10 +1,13 @@
 import os
+
 from flask import Flask
-from .config import config_dict
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
-from .db import init_db, init_pool
 from routes import register_blueprints
+
+from .config import config_dict
+from .db import init_db, init_pool
+
 
 def create_app(config_name=None):
     if config_name is None:
