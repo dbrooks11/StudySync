@@ -5,6 +5,19 @@ from psycopg.rows import dict_row
 
 course_bp = Blueprint("courses", __name__, url_prefix='/courses')
 
+@course_bp.route('/course-list', methods = ['GET'])
+@jwt_required()
+def get_course_list():
+    try:
+        with pool.connection() as conn:
+            with conn.cursor(row_factory=dict_row) as cur:
+                course_list = cur.execute("""
+                                            SELECT course_id, course_code
+                                            FROM course
+                                            """).fetchall()
+        return jsonify({'course_list': course_list}),200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @course_bp.route('/course-list/add', methods = ['POST'])
 @jwt_required()

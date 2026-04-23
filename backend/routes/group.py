@@ -8,6 +8,35 @@ from psycopg.rows import dict_row
 group_bp = Blueprint("groups", __name__, url_prefix='/groups')
 
 
+@group_bp.route('/join/<int:group_id>', methods = ['POST'])
+@jwt_required()
+def join_group(group_id):
+    id = get_jwt_identity()
+
+    try:
+        if not group_id:
+            return jsonify({'error': 'Invalid study group'}), 400
+
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                group_exist = cur.execute("""
+                                          SELECT group_id 
+                                          FROM studygroup
+                                          WHERE group_id = %s
+                                          """,(group_id)).fetchone()
+                
+                if not group_exist:
+                    return jsonify({'error': 'This group does not exist'}), 404
+        
+                cur.execute("""
+                            INSERT INTO participating(student_id, group_id) 
+                            VALUES(%s, %s)
+                            """, (id, group_id))
+    
+        return jsonify({'message': 'Successfully joined study group'}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 @group_bp.route('/create', methods = ['POST'])
 @jwt_required()
 def create_group():
@@ -17,7 +46,7 @@ def create_group():
         course_id = request.form.get('course_id')
         group_name = request.form.get('group_name')
         location = request.form.get('location')
-        meeting_time = request.form.get('meeting_time')
+        meeting_time = datetime.fromisoformat(request.form.get('meeting_time'))
         max_size = int(request.form.get('max_size'))
 
         if not all([course_id, group_name, location, meeting_time, max_size]):
@@ -48,13 +77,13 @@ def delete_group(group_id, course_id):
                 cur.execute("""
                             DELETE FROM studygroup
                             WHERE host_id = %s 
-                                AND group_id = %s)
+                                AND group_id = %s
                                 AND course_id = %s
                             """, (id, group_id, course_id,))
                 
                 my_groups = cur.execute("""
                             SELECT *
-                            FROM studygroup)
+                            FROM studygroup
                             WHERE host_id = %s
                             """,(id,)).fetchall()
                 
