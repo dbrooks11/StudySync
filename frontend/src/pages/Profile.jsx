@@ -1,46 +1,54 @@
 import {useState, useEffect} from "react";
-import Navbar from "../components/Navbar";
-import SuggestedGroups from "../components/Profile/SuggestedGroups";
 import Availability from "../components/Profile/Availability";
 import Info from "../components/Profile/Info";
-
+import GroupLayout from "../components/GroupLayout";
 
 export default function Profile(){
-const [profile, setProfile] = useState({})
+    const [profile, setProfile] = useState({})
+    const [joinedGroups, setJoinedGroups] = useState([])
 
-useEffect(() => {
-    const fetchProfile = async() => {
-        try{
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/profile/me`, {
-            credentials: "include",
-            method: "GET"
-        })
-        
-        const data = await response.json()
-
-        if(!response.ok){
-            throw new Error(data)
+    useEffect(() => {
+        const fetchProfile = async() => {
+            try{
+                const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/profile/me`, {
+                    credentials: "include",
+                    method: "GET"
+                })
+                const data = await response.json()
+                if(!response.ok) throw new Error(data)
+                setProfile(data.profile)
+            }catch(error){
+                console.log(error)
+            }
         }
-        setProfile(data.profile)
-        } catch(error){
-            console.log(error)
-        }
-    }
 
-    fetchProfile()
-}, []);
+        const fetchJoinedGroups = async() => {
+            try{
+                const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/groups/me`, {
+                    credentials: "include"
+                })
+                const data = await response.json()
+                if(!response.ok) throw new Error(data.error)
+                setJoinedGroups(data.joined_groups)
+            }catch(error){
+                console.log(error)
+            }
+        }
+
+        fetchProfile()
+        fetchJoinedGroups()
+    }, []);
 
     return(
         <main className="profile-layout">
             <div className="top-row">
                 <div className="profile-card">
-                    
                     <Info
-                        firstName = {profile.info?.first_name}
-                        lastName = {profile.info?.last_name}
-                        email = {profile.info?.email}
-                        major = {profile.info?.major}
-                        gpa = {profile.info?.gpa}
+                        firstName={profile.info?.first_name}
+                        lastName={profile.info?.last_name}
+                        email={profile.info?.email}
+                        major={profile.info?.major}
+                        gpa={profile.info?.gpa}
                     />
                 </div>
                 <div className="avail-card">
@@ -51,7 +59,14 @@ useEffect(() => {
                 </div>
             </div>
             <div className="groups-card">
-                <SuggestedGroups groups={profile?.suggested_groups} />
+                <h3>Your Joined Groups</h3>
+                <div className="course-cards-container">
+                    {joinedGroups.map((group) => (
+                        <div key={group.group_id} className="group-card">
+                            <GroupLayout {...group} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </main>
     );

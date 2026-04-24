@@ -38,12 +38,12 @@ export default function ProtectedRoutes() {
                     icon: "fa-solid fa-users",
                     color: "#ff00dd"
                 },
-                {
+                /*{
                     title: "My Groups",
                     route: "/my-groups",
                     icon: "fa-solid fa-layer-group",
                     color: "#c76e09"
-                }
+                }*/
             ]} 
             />
             <main className="main">
