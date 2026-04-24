@@ -20,13 +20,15 @@ def join_group(group_id):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 group_exist = cur.execute("""
-                                          SELECT group_id 
-                                          FROM studygroup
-                                          WHERE group_id = %s
+                                          SELECT sg.group_id 
+                                          FROM studygroup as sg
+                                          JOIN participating as p ON p.group_id = sg.group_id
+                                          WHERE sg.group_id = %s
+                                            AND COUNT(p.student_id) < sg.max_size
                                           """,(group_id)).fetchone()
                 
                 if not group_exist:
-                    return jsonify({'error': 'This group does not exist'}), 404
+                    return jsonify({'error': 'This group does not exist or is full'}), 404
                 
                 is_host = cur.execute("""
                                       SELECT host_id 
@@ -166,7 +168,32 @@ def my_groups():
 def all_groups():
     id = get_jwt_identity()
 
-    with pool.connection() as conn:
-        with conn.cursor(row_factory=dict_row) as cur:
-
-            pass
+    try:
+        with pool.connection() as conn:
+            with conn.cursor(row_factory=dict_row) as cur:
+                recommended_groups = cur.execute("""
+                                                 SELECT 
+                                                    sg.group_id, 
+                                                    sg.group_name, 
+                                                    sg.location, 
+                                                    sg.meeting_time,
+                                                    sg.max_size, 
+                                                    c.course_name,
+                                                    c.course_code,
+                                                    (sg.max_size - COUNT(p.student_id)) AS spots_left
+                                                FROM StudyGroup as sg
+                                                JOIN Enrollment as e ON sg.course_id = e.course_id
+                                                JOIN Course as c ON sg.course_id = c.course_id
+                                                JOIN Availability as a ON e.student_id = a.student_id
+                                                LEFT JOIN Participating as p ON sg.group_id = p.group_id
+                                                WHERE e.student_id = %s 
+                                                AND a.day_of_week = TRIM(TO_CHAR(sg.meeting_time, 'Day'))
+                                                AND sg.meeting_time::time >= a.start_time
+                                                AND sg.meeting_time::time <= a.end_time
+                                                GROUP BY sg.group_id, c.course_name, c.course_code, a.start_time, a.end_time
+                                                HAVING COUNT(p.student_id) < sg.max_size
+                                                ORDER BY sg.created_at DESC
+                                                 """, (id,)).fetchall()
+                return jsonify({'recommended_groups': recommended_groups}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500            
