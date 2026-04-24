@@ -54,6 +54,16 @@ def edit_profil():
         with pool.connection() as conn:
             with conn.cursor(row_factory=dict_row) as cur:
                 if email:
+
+                    email_exist = cur.execute("""
+                                              SELECT student_id
+                                              FROM student
+                                              WHERE email = %s
+                                                AND student_id != %s
+                                              """, (email,id,)).fetchone()
+                    if email_exist:
+                        return jsonify({'error': 'Email already exist'}), 409
+                    
                     cur.execute("""
                         UPDATE student
                         SET email = %s 
