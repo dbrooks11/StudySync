@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import GroupLayout from "../components/GroupLayout";
 
 
 export default function MyGroups(){
@@ -81,18 +82,9 @@ export default function MyGroups(){
                 {createdGroups.map((group) => {
                     return(
                         <div className="group" key={group.group_id}>
-                            <div>
-                                <div className="group top">
-                                    <span>{group.group_name}</span>
-                                    <span>{group.course_code}</span>
-                                    <span>{group.course_name}</span>
-                                </div>
-                                <div className="group bottom">
-                                    <span>on {group.meeting_time}</span>
-                                    <span>at {group.location}</span>
-                                </div>
-                                <span>Joined 0/{group.max_size}</span>
-                            </div>
+                            <GroupLayout
+                                {...group}
+                            />
                             <button type="button" onClick={() => deleteGroup(group.group_id, group.course_id)}>Delete</button>
                         </div>
                     )
@@ -103,18 +95,9 @@ export default function MyGroups(){
                 {joinedGroups.map((group) => {
                     return(
                         <div className="group" key={group.group_id}>
-                            <div>
-                                <div className="group top">
-                                    <span>{group.group_name}</span>
-                                    <span>{group.course_code}</span>
-                                    <span>{group.course_name}</span>
-                                </div>
-                                <div className="group bottom">
-                                    <span>on {group.meeting_time}</span>
-                                    <span>at {group.location}</span>
-                                </div>
-                                <span>Joined 0/{group.max_size}</span>
-                            </div>
+                            <GroupLayout 
+                                {...group}
+                            />
                             <button type="button" onClick={() => leaveGroup(group.group_id)}>Leave</button>
                         </div>
                     )
