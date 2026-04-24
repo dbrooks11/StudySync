@@ -1,8 +1,12 @@
 
 
-import '../../css/Profile.css'
-
-export default function Availability({availabilities = [], setProfile}) {
+export default function Availability({availabilities = [
+    { avail_id: 1, day_of_week: "Monday", start_time: "09:00", end_time: "12:00" },
+    { avail_id: 2, day_of_week: "Wednesday", start_time: "13:00", end_time: "15:30" },
+    { avail_id: 3, day_of_week: "Friday", start_time: "10:00", end_time: "11:00" },
+    { avail_id: 3, day_of_week: "Friday", start_time: "10:00", end_time: "11:00" },
+    { avail_id: 3, day_of_week: "Friday", start_time: "10:00", end_time: "11:00" },
+], setProfile}) {
 
     const addAvailability = async(formData) => {
 
@@ -71,9 +75,12 @@ export default function Availability({availabilities = [], setProfile}) {
 
     return(
         <section className='avail-container'>
-            <div className='avail-container header'>
-                <h3>Availability</h3>
-            </div>
+                <div className='avail-header'>
+                    <div>
+                        <h3>Availability</h3>
+                        <p className="avail-subtitle">Add your weekly free windows below — we'll use them to find groups that fit your schedule.</p>
+                    </div>
+                </div>
             <form className='avail-form' action={addAvailability}>
                 <div>
                     <label htmlFor='day'>Day</label>

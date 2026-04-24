@@ -1,0 +1,333 @@
+/* ============================================================
+   components.css — Feature-level component styles
+   Used by: Auth, Info, Availability, Courses, SuggestedGroups
+   ============================================================ */
+
+/* ── AUTH (Login.jsx, Register.jsx) ─────────────────────── */
+
+.auth-form-wrapper {
+  font-size: 16px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 16px;
+  color: var(--text);
+}
+
+/* Register grid layout */
+#auth-form {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 32px;
+}
+
+/* Login stacked layout */
+#auth-form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.auth-form-input {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.auth-form-input > input {
+  border-radius: 4px;
+}
+
+#auth-form-button {
+  width: 40%;
+  height: 2.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#auth-form-button:hover {
+  background-color: rgb(115, 114, 114);
+}
+
+/* ── PROFILE INFO (Info.jsx) ─────────────────────────────── */
+
+#info-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;                        /* fills remaining card height */
+  gap: 24px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--primary-dark);
+}
+
+#info-name {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--text-h);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+#info-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  justify-content: space-evenly;  /* spreads the rows across remaining height */
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.info-value {
+  font-size: 16px;
+  color: var(--text);
+}
+
+/* ── AVAILABILITY (Availability.jsx) ─────────────────────── */
+.avail-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.avail-header {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--primary-dark);
+  gap: 2px;
+}
+.avail-header h3 {
+  margin: 0;
+}
+
+.avail-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.avail-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.avail-form > div {
+  text-wrap: nowrap;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.avail-form input {
+  background-color: var(--primary-light);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.avail-form input:focus {
+  border-color: var(--text-muted);
+}
+
+.avail-form > button {
+  background-color: var(--accent);
+  color: #0a0a0a;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  transition: opacity 0.15s;
+}
+
+.avail-form > button:hover {
+  opacity: 0.85;
+}
+
+.availabilities-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  overflow-y: auto;     
+  flex: 1;              
+  min-height: 0;        
+}
+
+.availabilities {
+  display: flex;
+  gap: 32px;
+  justify-content: space-between;
+  padding: 4px 12px;
+  background-color: var(--primary-light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.availabilities > div {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.availabilities > div > div {
+  display: flex;
+  gap: 8px;
+}
+
+.availabilities > div > span {
+  display: inline-block;
+  width: 100px;   /* wide enough for "Wednesday" */
+}
+
+.availabilities > button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.availabilities > button:hover {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+
+/* ── SUGGESTED GROUPS (SuggestedGroups.jsx) ──────────────── */
+
+.suggestions {
+  width: 100%;
+  padding: 0 8px;
+}
+
+.group-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.group-card {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--primary-light);
+  text-align: left;
+  height: 200px;
+}
+
+.group-line {
+  margin-bottom: 6px;
+}
+
+.group-line:last-child {
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+
+/* ── COURSES (Courses.jsx) ───────────────────────────────── */
+
+.course-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.course-grid input {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  background: var(--primary-dark);
+  color: var(--text);
+}
+
+.submit-btn {
+  margin-top: 8px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary-light);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background: #5aa9cf;
+  color: #0a0a0a;
+}
+
+.courses-container {
+  display: flex;
+  gap: 32px;
+  background-color: var(--primary);
+  width: 100%;
+  margin-top: 16px;
+}
+
+.courses-container > div {
+  flex: 1;
+}
+
+.course {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.course .top {
+  display: flex;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.course .bottom {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-muted);
+}

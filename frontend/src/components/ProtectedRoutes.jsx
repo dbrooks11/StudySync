@@ -2,7 +2,7 @@ import Navbar from "./Navbar"
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import "../css/CardContainers.css"
+
 
 
 export default function ProtectedRoutes() {
@@ -16,23 +16,33 @@ export default function ProtectedRoutes() {
             options = {[
                 {
                     title: "Profile",
-                    route: "/profile"
+                    route: "/profile", 
+                    icon: "fa-solid fa-user",
+                    color: "#8efb29"
                 },
                 {
                     title: "Enrolled courses",
-                    route: "/courses"
+                    route: "/courses", 
+                    icon: "fa-solid fa-book-open",
+                    color: "#008b17"
                 },
                 {
                     title: "Join Group",
-                    route: "/join-group"
+                    route: "/join-group", 
+                    icon: "fa-solid fa-user-plus",
+                    color: "#4c00ff"
                 },
                 {
                     title: "Create Group",
-                    route: "/create-group"
+                    route: "/create-group", 
+                    icon: "fa-solid fa-users",
+                    color: "#ff00dd"
                 },
                 {
                     title: "Joined Groups",
-                    route: "/joined"
+                    route: "/joined",
+                    icon: "fa-solid fa-layer-group",
+                    color: "#c76e09"
                 }
             ]} 
             />

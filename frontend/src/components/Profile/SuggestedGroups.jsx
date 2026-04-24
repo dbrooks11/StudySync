@@ -1,3 +1,4 @@
+
 export default function SuggestedGroups() {
     const mockGroupsA = [
         "Study Group A",

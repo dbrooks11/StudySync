@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom"
 
+
 export default function Navbar({ options = [] }) {
   return (
     <div className = "navbar">
@@ -13,7 +14,12 @@ export default function Navbar({ options = [] }) {
       <div className="sidebar">
         <ul>
           {options.map((item, i) => (
-            <Link key={i} to={item.route} id="route">{item.title}</Link>
+            <li key={i}>
+              <Link to={item.route} id="route">
+                <i className={item.icon} style={{ color: item.color }} />
+                {item.title}
+              </Link>
+            </li>
           ))}
         </ul>
       </div>

@@ -1,5 +1,4 @@
 
-import '../css/Auth.css'
 
 export default function Register() {
 
@@ -25,6 +24,7 @@ export default function Register() {
 
 
     return (
+        <div className="auth-form-wrapper">
         <form action={registerForm}>
             <h2>Register</h2>
             <section className="auth-form" id="auth-form">
@@ -55,5 +55,6 @@ export default function Register() {
             </section>
             <button type="submit" id="auth-form-button">Register</button>
         </form>
+        </div>
     )
 }

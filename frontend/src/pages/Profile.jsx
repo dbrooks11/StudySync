@@ -4,7 +4,6 @@ import SuggestedGroups from "../components/Profile/SuggestedGroups";
 import Availability from "../components/Profile/Availability";
 import Info from "../components/Profile/Info";
 
-import "../css/Profile.css";
 
 export default function Profile(){
 const [profile, setProfile] = useState({})
@@ -36,7 +35,7 @@ useEffect(() => {
         <main className="profile-layout">
             <div className="top-row">
                 <div className="profile-card">
-                    <h1>Profile</h1>
+                    
                     <Info
                         firstName = {profile.info?.first_name}
                         lastName = {profile.info?.last_name}
@@ -52,7 +51,9 @@ useEffect(() => {
                     />
                 </div>
             </div>
-            <SuggestedGroups />
+            <div className="groups-card">
+                <SuggestedGroups />
+            </div>
         </main>
     );
 }
