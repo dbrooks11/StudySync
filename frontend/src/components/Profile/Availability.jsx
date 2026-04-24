@@ -58,7 +58,7 @@ export default function Availability({availabilities = [], setProfile}) {
                 <div className='avail-header'>
                     <div>
                         <h3>Availability</h3>
-                        <p className="avail-subtitle">Add your weekly free windows below — we'll use them to find groups that fit your schedule.</p>
+                        <p className="avail-subtitle">Add your weekly free windows below - we'll use them to find groups that fit your schedule.</p>
                     </div>
                 </div>
             <form className='avail-form' onSubmit={(e) => {

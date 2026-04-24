@@ -56,6 +56,7 @@
 #info-container {
   display: flex;
   flex-direction: column;
+  position: relative;
   flex: 1;                        /* fills remaining card height */
   gap: 24px;
   padding: 20px;
@@ -97,6 +98,71 @@
   font-size: 16px;
   color: var(--text);
 }
+
+.info-edit-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.info-button {
+  background-color: transparent;
+  color: white;
+}
+
+.update-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:16px;
+  padding: 16px;
+  position: absolute;
+  background-color: rgb(7, 7, 7);
+  width:300px;
+  top: 25%;
+  left: 25%;
+  box-shadow: 6px 6px 10px 0px rgb(34, 34, 34);
+}
+
+.update-form > div {
+  display: flex;
+  gap: 8px;
+}
+
+.update-form > div > input {
+  background-color: var(--primary-light);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.update-form > .close-btn {
+  width: 25px;
+  align-self: flex-end;
+}
+
+.update-form > button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  width: 50%;
+  padding: 4px 10px;
+  font-size: 13px;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.update-form > button:hover {
+  background-color: var(--primary-light);
+  color: var(--text);
+}
+
 
 /* ── AVAILABILITY (Availability.jsx) ─────────────────────── */
 .avail-container {

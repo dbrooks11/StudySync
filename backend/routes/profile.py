@@ -34,6 +34,58 @@ def profile():
         }}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+@profile_bp.route('/edit', methods = ['PATCH'])
+@jwt_required()
+def edit_profil():
+    id = get_jwt_identity()
+    email = request.form.get('email', '')
+    major = request.form.get('major', '')
+    gpa = request.form.get('gpa', '')
+
+    try:
+        if gpa:
+            gpa = float(gpa)
+        
+            if not (0.0 <= gpa <= 5.0):
+                return jsonify({'error': 'GPA must be between 0.0 and 5.0'}), 422
+
+        with pool.connection() as conn:
+            with conn.cursor(row_factory=dict_row) as cur:
+                if email:
+                    cur.execute("""
+                        UPDATE student
+                        SET email = %s 
+                        WHERE student_id = %s
+                        """, (email,id,))
+                
+                if major:
+                    cur.execute("""
+                        UPDATE student
+                        SET major = %s 
+                        WHERE student_id = %s
+                        """, (major,id,))
+                
+                if gpa:
+                    cur.execute("""
+                        UPDATE student
+                        SET gpa = %s 
+                        WHERE student_id = %s
+                        """, (gpa,id,))
+            
+                updated_profile = cur.execute("""
+                                            SELECT email, major, gpa
+                                            FROM student
+                                            WHERE student_id = %s
+                                            """,(id,)).fetchone()
+        
+        return jsonify({'message': 'Updated Profile Successfully',
+                        'profile': updated_profile}), 200
+    except ValueError:
+        return jsonify({'error': 'GPA must be a number'}), 422
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
     
 
 @profile_bp.route('/availability/add', methods = ['POST'])

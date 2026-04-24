@@ -41,6 +41,7 @@ useEffect(() => {
                         email = {profile.info?.email}
                         major = {profile.info?.major}
                         gpa = {profile.info?.gpa}
+                        setProfile={setProfile}
                     />
                 </div>
                 <div className="avail-card">
