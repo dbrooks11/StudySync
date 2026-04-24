@@ -28,21 +28,24 @@ export default function Login() {
     }
 
     return(
-        <div className="auth-form-wrapper">
-        <form action={loginForm}>
-            <h2>Login</h2>
-            <section className="auth-form-login" id="auth-form-login">
-                <div className='auth-form-input'>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" ></input>
-                </div>
-                <div className='auth-form-input'>
-                    <label htmlFor="password">Password</label>
-                    <input id="password" name="password" ></input>
-                </div>
-            </section>
-            <button type="submit" id="auth-form-button">Login</button>
-        </form>
+        <div className="auth-page">
+            <img src="src/assets/StudySyncLogo1.png" alt="StudySync Logo" className="auth-logo" />
+            <div className="auth-card">
+                <h2>Welcome Back</h2>
+                <p className="auth-subtitle">Sign in to your StudySync account</p>
+                <form className="auth-form-fields" action={loginForm}>
+                    <div className="auth-field">
+                        <label className="auth-label" htmlFor="email">Email</label>
+                        <input className="auth-input" type="email" id="email" name="email" placeholder="you@university.edu" />
+                    </div>
+                    <div className="auth-field">
+                        <label className="auth-label" htmlFor="password">Password</label>
+                        <input className="auth-input" type="password" id="password" name="password" placeholder="••••••••" />
+                    </div>
+                    <button type="submit" className="auth-submit-btn">Login</button>
+                </form>
+                <p className="auth-switch">Don't have an account? <a href="/register">Register here</a></p>
+            </div>
         </div>
     )
 }

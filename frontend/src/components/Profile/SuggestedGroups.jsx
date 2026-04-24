@@ -1,8 +1,4 @@
-export default function SuggestedGroups({ groups = [
-        { group_id: 1, group_name: "Study Group A", course_id: "COP3330", host_id: "John Doe", location: "Dirac Library", meeting_time: "Mon 3:00 PM" },
-        { group_id: 2, group_name: "Study Group B", course_id: "MAC2311", host_id: "Jane Smith", location: "Strozier Library", meeting_time: "Wed 5:00 PM" },
-        { group_id: 3, group_name: "Study Group C", course_id: "CDA3101", host_id: "Bob Jones", location: "Online", meeting_time: "Fri 1:00 PM" },
-    ]}) {
+export default function SuggestedGroups({ groups = []}) {
 
     return (
         <div className="suggestions">

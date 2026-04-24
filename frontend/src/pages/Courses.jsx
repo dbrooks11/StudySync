@@ -6,22 +6,8 @@ export default function Courses(){
 
 
     
-    const [courseList, setCourseList] = useState([
-        { course_id: 1, course_code: "COP3330", course_name: "Object Oriented Programming", department: "Computer Science", credits: 3 },
-        { course_id: 2, course_code: "MAC2311", course_name: "Calculus I", department: "Mathematics", credits: 4 },
-        { course_id: 3, course_code: "CDA3101", course_name: "Computer Organization", department: "Computer Science", credits: 3 },
-        { course_id: 1, course_code: "COP3330", course_name: "Object Oriented Programming", department: "Computer Science", credits: 3 },
-        { course_id: 2, course_code: "MAC2311", course_name: "Calculus I", department: "Mathematics", credits: 4 },
-        { course_id: 1, course_code: "COP3330", course_name: "Object Oriented Programming", department: "Computer Science", credits: 3 },
-        { course_id: 2, course_code: "MAC2311", course_name: "Calculus I", department: "Mathematics", credits: 4 }
-    ])
-    const [enrolledCourses, setEnrolledCourses] = useState([
-        { course_id: 4, course_code: "COP4600", course_name: "Operating Systems", department: "Computer Science", credits: 3 },
-        { course_id: 5, course_code: "MAD2104", course_name: "Discrete Mathematics", department: "Mathematics", credits: 3 },
-        { course_id: 1, course_code: "COP3330", course_name: "Object Oriented Programming", department: "Computer Science", credits: 3 },
-        { course_id: 2, course_code: "MAC2311", course_name: "Calculus I", department: "Mathematics", credits: 4 },
-        { course_id: 1, course_code: "COP3330", course_name: "Object Oriented Programming", department: "Computer Science", credits: 3 },
-    ])
+    const [courseList, setCourseList] = useState([])
+    const [enrolledCourses, setEnrolledCourses] = useState([])
 
     useEffect(() => {
         const getCourses = async() => {
