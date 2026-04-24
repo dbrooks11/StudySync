@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+
+
 export default function Courses(){
 
     const [courseList, setCourseList] = useState([])

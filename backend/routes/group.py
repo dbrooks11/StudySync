@@ -38,7 +38,16 @@ def join_group(group_id):
                                     """, (id, group_id,)).fetchone()
                 
                 if is_host:
-                    return jsonify({'error': 'Can not join a group youre hosting'}), 409
+                    return jsonify({'error': 'Can not join a group you\'re hosting'}), 409
+                
+                current_size = cur.execute("""
+                                           SELECT COUNT(*) 
+                                           FROM participating 
+                                           WHERE group_id = %s
+                                           """, (group_id,)).fetchone()[0]
+                
+                if current_size >= group_exist[1]:
+                    return jsonify({'error': 'Group is already at maximum capacity'}), 409
         
                 cur.execute("""
                             INSERT INTO participating(student_id, group_id) 
@@ -63,6 +72,9 @@ def create_group():
 
         if not all([course_id, group_name, location, meeting_time, max_size]):
             return jsonify({'error': 'Please complete the form'}), 400
+        
+        if max_size <= 0:
+            return jsonify({'error': 'Maximum group size must be greater than 0'}), 422
 
         with pool.connection() as conn:
             with conn.cursor() as cur:

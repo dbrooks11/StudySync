@@ -1,7 +1,5 @@
 import { formatTime } from '../../util/datetimeConversion'
 
-import '../../css/Profile.css'
-
 
 export default function Availability({availabilities = [], setProfile}) {
 
@@ -57,10 +55,17 @@ export default function Availability({availabilities = [], setProfile}) {
 
     return(
         <section className='avail-container'>
-            <div className='avail-container header'>
-                <h3>Availability</h3>
-            </div>
-            <form className='avail-form' action={addAvailability}>
+                <div className='avail-header'>
+                    <div>
+                        <h3>Availability</h3>
+                        <p className="avail-subtitle">Add your weekly free windows below — we'll use them to find groups that fit your schedule.</p>
+                    </div>
+                </div>
+            <form className='avail-form' onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                addAvailability(formData);
+            }}>
                 <div>
                     <label htmlFor='day'>Day</label>
                     <input list='days' name='day' id='day'></input>

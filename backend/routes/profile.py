@@ -69,14 +69,14 @@ def add_availability():
                             VALUES(%s, %s, %s, %s)
                             """, (id,day, start_time, end_time))
 
-                availabilites = cur.execute("""
+                availabilities = cur.execute("""
                                             SELECT avail_id, day_of_week, start_time::text, end_time::text 
                                             FROM availability 
                                             WHERE student_id = %s
                                             """, (id,)).fetchall()
 
                 return jsonify({'message': 'Availability added successfully',
-                            'availabilities': availabilites}), 201
+                            'availabilities': availabilities}), 201
     except ValueError:
         return jsonify({'error': 'Invalid time format'}), 400
     except Exception as e:
@@ -99,13 +99,13 @@ def delete_availability(avail_id, day):
                             day_of_week = %s
                             """, (id, avail_id, day,))
 
-                availabilites = cur.execute("""
+                availabilities = cur.execute("""
                                             SELECT avail_id, day_of_week, start_time::text, end_time::text 
                                             FROM availability 
                                             WHERE student_id = %s""", (id,)).fetchall()
 
             return jsonify({'message': 'Availability removed successfully',
-                            'availabilities': availabilites}), 200
+                            'availabilities': availabilities}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     

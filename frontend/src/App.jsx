@@ -7,14 +7,14 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import ProtectedRoutes from './components/ProtectedRoutes'
 
-import './css/App.css'
+
 
 export default function App() {
 
   return (
     <>
       <Routes>
-        <Route index element={''}/>
+        <Route index element={<ProtectedRoutes/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
 
