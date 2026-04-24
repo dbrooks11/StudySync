@@ -55,6 +55,46 @@ export default function CreateGroup() {
         
 
     return(
+    <main className="courses-layout">
+        <div className="courses-form-card">
+            <h2>Create a Study Group</h2>
+            <p className="courses-subtitle">Set up a new study group for your course — your classmates will be able to find and join it.</p>
+            <form className="course-form" action={createGroup}>
+                <div className="create-group-grid">
+                    <div className="create-group-field">
+                        <label className="create-group-label" htmlFor="group-name">Group Name</label>
+                        <input placeholder="e.g. Monday Crammers" name="group_name" id="group-name" />
+                    </div>
+                    <div className="create-group-field">
+                        <label className="create-group-label" htmlFor="location">Location</label>
+                        <input placeholder="e.g. Dirac Library" name="location" id="location" />
+                    </div>
+                    <div className="create-group-field">
+                        <label className="create-group-label" htmlFor="group-size">Group Size</label>
+                        <input placeholder="e.g. 5" id="group-size" name="max_size" type="number" />
+                    </div>
+                    <div className="create-group-field">
+                        <label className="create-group-label" htmlFor="meeting">Meeting Time</label>
+                        <input type="datetime-local" id="meeting" name="meeting_time" />
+                    </div>
+                    <div className="create-group-field">
+                        <label className="create-group-label" htmlFor="courses">Course</label>
+                        <select name="course_id" id="courses" className="create-group-select">
+                            {courseList.map(course => (
+                                <option key={course.course_id} value={course.course_id}>
+                                    {course.course_code} — {course.course_name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" className="submit-btn">Create Group</button>
+            </form>
+        </div>
+    </main>
+    )
+    /*
+    return(
         <section className='avail-container'>
             <form className="course-form" action={createGroup}>
                 <h2>Create a Study Group</h2>
@@ -110,5 +150,5 @@ export default function CreateGroup() {
                 </button>
             </form>
         </section>
-    )
+    )*/
 }

@@ -212,7 +212,7 @@
 .availabilities > button {
   background: transparent;
   border: 1px solid var(--border);
-  color: var(--text-muted);
+  color: #c0392b;
   border-radius: 6px;
   padding: 4px 10px;
   font-size: 13px;
@@ -221,16 +221,12 @@
 
 .availabilities > button:hover {
   border-color: #c0392b;
-  color: #c0392b;
+  color: #fff;
 }
 
 
 /* ── SUGGESTED GROUPS (SuggestedGroups.jsx) ──────────────── */
 
-.suggestions {
-  width: 100%;
-  padding: 0 8px;
-}
 
 .group-container {
   display: grid;
@@ -239,31 +235,86 @@
   margin-top: 16px;
 }
 
-.group-card {
+    .group-card {
   padding: 16px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--primary-light);
   text-align: left;
-  height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.group-line {
-  margin-bottom: 6px;
+.group-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-h);
+  padding-bottom: 0px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1px;
 }
 
-.group-line:last-child {
-  font-weight: bold;
-  margin-bottom: 0;
+.group-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
+
+.group-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.group-join-btn {
+  margin-top: 4px;
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #0a0a0a;
+  font-weight: 600;
+  font-size: 13px;
+  transition: opacity 0.15s;
+}
+
+.group-join-btn:hover {
+  opacity: 0.85;
+    }
+
 
 
 /* ── COURSES (Courses.jsx) ───────────────────────────────── */
 
-.course-form {
+.courses-layout {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
+}
+
+.courses-form-card {
+  background: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.courses-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+.course-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
 }
 
@@ -280,54 +331,177 @@
   font-size: 14px;
   background: var(--primary-dark);
   color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.course-grid input:focus {
+  border-color: var(--text-muted);
 }
 
 .submit-btn {
-  margin-top: 8px;
   padding: 10px;
   border: none;
   border-radius: 6px;
-  background: var(--primary-light);
-  color: var(--text);
+  background: var(--accent);
+  color: #0a0a0a;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: opacity 0.2s;
 }
 
 .submit-btn:hover {
-  background: #5aa9cf;
-  color: #0a0a0a;
+  opacity: 0.85;
 }
 
-.courses-container {
+.courses-lists {
   display: flex;
-  gap: 32px;
-  background-color: var(--primary);
-  width: 100%;
-  margin-top: 16px;
-}
-
-.courses-container > div {
-  flex: 1;
-}
-
-.course {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   gap: 16px;
-  padding: 8px;
+}
+
+.courses-list-card {
+  background: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.courses-list-card h3 {
+  margin: 0;
+}
+
+.course-cards-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.course-card {
+  background: var(--primary-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.course-card-top {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
 }
 
-.course .top {
-  display: flex;
-  gap: 8px;
-  font-weight: 500;
+.course-code {
+  font-weight: 600;
+  color: var(--text-h);
+  font-size: 15px;
 }
 
-.course .bottom {
-  display: flex;
-  gap: 16px;
-  font-size: 14px;
+.course-name {
+  font-size: 13px;
   color: var(--text-muted);
+}
+
+.course-card-bottom {
+  display: flex;
+  gap: 24px;
+}
+
+.course-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.course-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.enroll-btn {
+  margin-top: 4px;
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #0a0a0a;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.enroll-btn:hover {
+  opacity: 0.85;
+}
+
+.remove-btn {
+  margin-top: 4px;
+  padding: 6px;
+  border: 1px solid #c0392b;
+  border-radius: 6px;
+  background: transparent;
+  color: #c0392b;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.remove-btn:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+/* ── CREATE GROUP (CreateGroup.jsx) ─────────────────────── */
+
+.create-group-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.create-group-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.create-group-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.create-group-field input,
+.create-group-select {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  background: var(--primary-dark);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.create-group-field input:focus,
+.create-group-select:focus {
+  border-color: var(--text-muted);
+}
+
+.create-group-select option {
+  background: var(--primary-dark);
+  color: var(--text);
 }

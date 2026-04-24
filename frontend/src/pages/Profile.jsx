@@ -51,7 +51,7 @@ useEffect(() => {
                 </div>
             </div>
             <div className="groups-card">
-                <SuggestedGroups />
+                <SuggestedGroups groups={profile?.suggested_groups} />
             </div>
         </main>
     );
