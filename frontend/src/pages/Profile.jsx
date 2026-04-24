@@ -33,22 +33,25 @@ useEffect(() => {
 }, []);
 
     return(
-        <main className="main">
-            <div className="profile-container">
-            {/* <CourseInput /> */}
-            <h1>Profile</h1>
-            <Info
-                firstName = {profile.info?.first_name}
-                lastName = {profile.info?.last_name}
-                email = {profile.info?.email}
-                major = {profile.info?.major}
-                gpa = {profile.info?.gpa}
-            />
+        <main className="profile-layout">
+            <div className="top-row">
+                <div className="profile-card">
+                    <h1>Profile</h1>
+                    <Info
+                        firstName = {profile.info?.first_name}
+                        lastName = {profile.info?.last_name}
+                        email = {profile.info?.email}
+                        major = {profile.info?.major}
+                        gpa = {profile.info?.gpa}
+                    />
+                </div>
+                <div className="avail-card">
+                    <Availability
+                        availabilities={profile?.availability}
+                        setProfile={setProfile}
+                    />
+                </div>
             </div>
-            <Availability
-                availabilities={profile?.availability}
-                setProfile={setProfile}
-            />
             <SuggestedGroups />
         </main>
     );

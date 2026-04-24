@@ -2,6 +2,8 @@ import Navbar from "./Navbar"
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
+import "../css/CardContainers.css"
+
 
 export default function ProtectedRoutes() {
 
