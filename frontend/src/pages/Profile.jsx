@@ -1,11 +1,9 @@
 import {useState, useEffect} from "react";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 import SuggestedGroups from "../components/Profile/SuggestedGroups";
 import Availability from "../components/Profile/Availability";
 import Info from "../components/Profile/Info";
 
-import "../css/Profile.css";
 
 export default function Profile(){
 const [profile, setProfile] = useState({})
@@ -33,21 +31,28 @@ useEffect(() => {
 }, []);
 
     return(
-        <main className="main">
-            {/* <CourseInput /> */}
-            <h1>Profile</h1>
-            <Info
-                firstName = {profile.info?.first_name}
-                lastName = {profile.info?.last_name}
-                email = {profile.info?.email}
-                major = {profile.info?.major}
-                gpa = {profile.info?.gpa}
-            />
-            <Availability
-                availabilities={profile?.availability}
-                setProfile={setProfile}
-            />
-            <SuggestedGroups />
+        <main className="profile-layout">
+            <div className="top-row">
+                <div className="profile-card">
+                    
+                    <Info
+                        firstName = {profile.info?.first_name}
+                        lastName = {profile.info?.last_name}
+                        email = {profile.info?.email}
+                        major = {profile.info?.major}
+                        gpa = {profile.info?.gpa}
+                    />
+                </div>
+                <div className="avail-card">
+                    <Availability
+                        availabilities={profile?.availability}
+                        setProfile={setProfile}
+                    />
+                </div>
+            </div>
+            <div className="groups-card">
+                <SuggestedGroups />
+            </div>
         </main>
     );
 }

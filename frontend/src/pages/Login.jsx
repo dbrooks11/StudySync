@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom'
 
-import '../css/Auth.css'
+
 
 export default function Login() {
     const navigate = useNavigate()
@@ -28,6 +28,7 @@ export default function Login() {
     }
 
     return(
+        <div className="auth-form-wrapper">
         <form action={loginForm}>
             <h2>Login</h2>
             <section className="auth-form-login" id="auth-form-login">
@@ -42,5 +43,6 @@ export default function Login() {
             </section>
             <button type="submit" id="auth-form-button">Login</button>
         </form>
+        </div>
     )
 }
