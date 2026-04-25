@@ -112,7 +112,6 @@
   width: var(--sidebar-w);
   height: calc(100vh - var(--header-h));
   background: var(--primary);
-  /* no border-right — black content area creates natural separation */
   padding-top: 24px;
   overflow-y: auto;
 }

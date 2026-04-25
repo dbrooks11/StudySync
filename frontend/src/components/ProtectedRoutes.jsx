@@ -12,7 +12,7 @@ export default function ProtectedRoutes() {
         .catch(() => setAuthed(false))
     }, [])
 
-    if (authed === null) return null  // still checking, render nothing
+    if (authed === null) return null
     if (!authed) return <Navigate to="/login" replace />
 
     return (

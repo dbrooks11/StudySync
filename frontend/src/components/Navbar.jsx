@@ -1,6 +1,9 @@
 import {Link} from "react-router-dom"
+import { useSearch } from '../SearchContext'
 
 export default function Navbar({ options = [] }) {
+  const { searchTerm, setSearchTerm } = useSearch()
+
   return (
     <div className="navbar">
       <header className="header">
@@ -11,14 +14,16 @@ export default function Navbar({ options = [] }) {
         </div>
 
         <div className="header-search">
-          <i className="fa-solid fa-magnifying-glass" />
-          <input placeholder="Search courses or groups..." />
+            <i className="fa-solid fa-magnifying-glass" />
+            <input 
+                placeholder="Search courses or groups..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
         </div>
 
-        <div className="header-actions">
-          <Link to="/settings" className="header-icon">
-            <i className="fa-solid fa-gear" />
-          </Link>
+        <div>
+
         </div>
       </header>
 

@@ -126,7 +126,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  flex: 1;                        /* fills remaining card height */
+  flex: 1;
   gap: 24px;
   padding: 20px;
   border-radius: 8px;
@@ -147,7 +147,7 @@
   flex-direction: column;
   gap: 16px;
   flex: 1;
-  justify-content: space-evenly;  /* spreads the rows across remaining height */
+  justify-content: space-evenly;
 }
 
 .info-row {
@@ -434,7 +434,7 @@
 
 .availabilities > div > span {
   display: inline-block;
-  width: 100px;   /* wide enough for "Wednesday" */
+  width: 100px;
 }
 
 .availabilities > button {
