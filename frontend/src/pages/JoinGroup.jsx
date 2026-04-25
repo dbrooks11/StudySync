@@ -4,6 +4,20 @@ import SuggestedGroups from "../components/Profile/SuggestedGroups";
 
 export default function JoinGroup() {
     const [recommendedGroups, setRecommendedGroups] = useState([])
+    const [allGroups, setAllGroups] = useState([])
+
+    const fetchAllGroups = async() => {
+        try{
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/groups/all`, {
+                credentials: "include",
+            })
+            const data = await response.json()
+            if(!response.ok) throw new Error(data.error)
+            setAllGroups(data.all_groups)
+        }catch(error){
+            console.error(error)
+        }
+    }
 
     const fetchRecommendedGroups = async() => {
         try{
@@ -19,8 +33,16 @@ export default function JoinGroup() {
     }
 
     useEffect(() => {
-        fetchRecommendedGroups()
-    }, []);
+    // temporary debug
+    fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/groups/debug`, {
+        credentials: "include"
+    })
+    .then(r => r.json())
+    .then(data => console.log("DEBUG:", data))
+
+    fetchRecommendedGroups()
+    fetchAllGroups()
+}, []);
 
     async function joinGroup(groupId) {
         try{
@@ -31,6 +53,7 @@ export default function JoinGroup() {
             const data = await response.json()
             if(!response.ok) throw new Error(data.error)
             fetchRecommendedGroups()
+            fetchAllGroups()
         }catch(error){
             console.error(error)
         }
@@ -45,6 +68,7 @@ export default function JoinGroup() {
             const data = await response.json()
             if(!response.ok) throw new Error(data.error)
             fetchRecommendedGroups()
+            fetchAllGroups()
         }catch(error){
             console.error(error)
         }
@@ -53,13 +77,17 @@ export default function JoinGroup() {
     return(
         <main className="courses-layout">
             <div className="groups-card">
-                <SuggestedGroups /*groups={recommendedGroups}*/ />
+                <SuggestedGroups 
+                    groups={recommendedGroups}
+                    onJoin={joinGroup}
+                    onLeave={leaveGroup}
+                />
             </div>
 
             <div className="courses-list-card">
                 <h3>All Groups</h3>
                 <div className="course-cards-container">
-                    {recommendedGroups.map(group => (
+                    {allGroups.map(group => (
                         <div key={group.group_id} className="group-card">
                             <GroupLayout {...group} />
                             {!group.is_joined

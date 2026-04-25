@@ -39,16 +39,30 @@ export default function Profile(){
         fetchJoinedGroups()
     }, []);
 
+    const leaveGroup = async(groupId) => {
+        try{
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/groups/leave/${groupId}`, {
+                credentials: "include",
+                method: "DELETE"
+            })
+            const data = await response.json()
+            if(!response.ok) throw new Error(data.error)
+            setJoinedGroups(data.joined_groups)
+        }catch(error){
+            console.log(error)
+        }
+    }
+
     return(
         <main className="profile-layout">
             <div className="top-row">
                 <div className="profile-card">
                     <Info
-                        firstName = {profile.info?.first_name}
-                        lastName = {profile.info?.last_name}
-                        email = {profile.info?.email}
-                        major = {profile.info?.major}
-                        gpa = {profile.info?.gpa}
+                        firstName={profile.info?.first_name}
+                        lastName={profile.info?.last_name}
+                        email={profile.info?.email}
+                        major={profile.info?.major}
+                        gpa={profile.info?.gpa}
                         setProfile={setProfile}
                     />
                 </div>
@@ -65,6 +79,9 @@ export default function Profile(){
                     {joinedGroups.map((group) => (
                         <div key={group.group_id} className="group-card">
                             <GroupLayout {...group} />
+                            <button className="remove-btn" type="button" onClick={() => leaveGroup(group.group_id)}>
+                                Leave
+                            </button>
                         </div>
                     ))}
                 </div>
