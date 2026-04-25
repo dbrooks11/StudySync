@@ -38,7 +38,7 @@ def profile():
 
 @profile_bp.route('/edit', methods = ['PATCH'])
 @jwt_required()
-def edit_profil():
+def edit_profile():
     id = get_jwt_identity()
     email = request.form.get('email', '')
     major = request.form.get('major', '')
