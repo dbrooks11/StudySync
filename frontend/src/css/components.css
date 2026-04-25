@@ -105,6 +105,17 @@
   opacity: 0.85;
 }
 
+.error-message {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid #dc2626;
+  color: #7f1d1d;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
 .auth-switch {
   font-size: 13px;
   color: var(--text-muted);

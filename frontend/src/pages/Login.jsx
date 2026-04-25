@@ -1,11 +1,18 @@
-import {useNavigate} from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import ErrorMessage from '../components/ErrorMessage'
 
 
 
 export default function Login() {
     const navigate = useNavigate()
+    const [error, setError] = useState('')
 
-    const loginForm = async(formData) => {
+    const loginForm = async(event) => {
+        event.preventDefault()
+        setError('')
+
+        const formData = new FormData(event.target)
         try{
             const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/auth/login`, {
                 method: "POST",
@@ -18,12 +25,16 @@ export default function Login() {
             if(response.ok) {
                 console.log(data.message)
                 navigate('/profile')
-                
-            }else{
-                throw new Error(data.error)
+            } else {
+                const message = data?.error || 'Login failed. Please ensure you entered the correct Email and Password.'
+                setError(message)
+                throw new Error(message)
             }
         }catch(error){
             console.log(error)
+            if (!error?.message) {
+                setError('Unable to login. Please try again.')
+            }
         }
     }
 
@@ -33,7 +44,8 @@ export default function Login() {
             <div className="auth-card">
                 <h2>Welcome Back</h2>
                 <p className="auth-subtitle">Sign in to your StudySync account</p>
-                <form className="auth-form-fields" action={loginForm}>
+                {error && <ErrorMessage message={error} />}
+                <form className="auth-form-fields" onSubmit={loginForm}>
                     <div className="auth-field">
                         <label className="auth-label" htmlFor="email">Email</label>
                         <input className="auth-input" type="email" id="email" name="email" placeholder="you@university.edu" />

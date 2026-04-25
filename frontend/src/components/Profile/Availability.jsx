@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { formatTime } from '../../util/datetimeConversion'
-
+import ErrorMessage from '../ErrorMessage'
 
 export default function Availability({availabilities = [], setProfile}) {
+    const [error, setError] = useState('')
 
     const addAvailability = async(formData) => {
 
@@ -15,7 +17,9 @@ export default function Availability({availabilities = [], setProfile}) {
             const data = await response.json()
 
             if(!response.ok){
-                throw new Error(data.error)
+                const message = data?.error || 'Unable to add availability. Please check selected times.'
+                setError(message)
+                throw new Error(message)
             }
             setProfile((profile) => {
                 return {
@@ -26,6 +30,9 @@ export default function Availability({availabilities = [], setProfile}) {
             console.log(data)
         }catch(error){
             console.log(error)
+            if (!error?.message) {
+                setError('Unable to add availability. Please try again.')
+            }
         }
     }
 
@@ -50,6 +57,9 @@ export default function Availability({availabilities = [], setProfile}) {
             console.log(data)
         }catch(error){
             console.log(error)
+            if (!error?.message) {
+                setError('Unable to remove availability. Please try again.')
+            }
         }
     }
 
@@ -63,9 +73,11 @@ export default function Availability({availabilities = [], setProfile}) {
                 </div>
             <form className='avail-form' onSubmit={(e) => {
                 e.preventDefault();
+                setError('')
                 const formData = new FormData(e.target);
                 addAvailability(formData);
             }}>
+                {error && <ErrorMessage message={error} />}
                 <div>
                     <label htmlFor='day'>Day</label>
                     <input list='days' name='day' id='day'></input>

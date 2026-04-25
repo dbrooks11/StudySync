@@ -1,9 +1,16 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ErrorMessage from '../components/ErrorMessage'
 
 export default function Register() {
     const navigate = useNavigate()
+    const [error, setError] = useState('')
 
-    const registerForm = async(formData) => {
+    const registerForm = async(event) => {
+        event.preventDefault()
+        setError('')
+
+        const formData = new FormData(event.target)
         console.log(formData)
        try {
         const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/auth/register`, {
@@ -16,11 +23,16 @@ export default function Register() {
         if(response.ok){
             console.log(data.message)
             navigate('/login')
-        }else{
-            throw new Error(data.error)
+        } else {
+            const message = data?.error || 'Email already in use. Please use a different email to register.' 
+            setError(message)
+            throw new Error(message)
         }
        }catch(error){
         console.log(error)
+        if (!error?.message) {
+            setError('Unable to register. Please try again.')
+        }
        } 
     }
 
@@ -31,7 +43,8 @@ export default function Register() {
             <div className="auth-card">
                 <h2>Create Account</h2>
                 <p className="auth-subtitle">Join StudySync and find your study group</p>
-                <form className="auth-form-fields" action={registerForm}>
+                {error && <ErrorMessage message={error} />}
+                <form className="auth-form-fields" onSubmit={registerForm}>
                     <div className="auth-grid">
                         <div className="auth-field">
                             <label className="auth-label" htmlFor="first_name">First Name</label>

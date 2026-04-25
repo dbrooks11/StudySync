@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ErrorMessage from "../components/ErrorMessage";
 
 
 
@@ -8,6 +9,7 @@ export default function Courses(){
     
     const [courseList, setCourseList] = useState([])
     const [enrolledCourses, setEnrolledCourses] = useState([])
+    const [error, setError] = useState('')
 
     useEffect(() => {
         const getCourses = async() => {
@@ -34,7 +36,11 @@ export default function Courses(){
         getCourses()
     }, []);
 
-    const handleCourseListSubmit = async(formData) => {
+    const handleCourseListSubmit = async(event) => {
+        event.preventDefault()
+        setError('')
+
+        const formData = new FormData(event.target)
         try {
             const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/courses/course-list/add`, {
                 credentials: "include",
@@ -45,13 +51,18 @@ export default function Courses(){
             const data = await response.json()
 
             if (!response.ok) {
-                throw new Error(data.error)
+                const message = data?.error || 'Unable to add course. Please check your input.'
+                setError(message)
+                throw new Error(message)
             }
 
             setCourseList(data.course_list)
 
         }catch(error){
             console.error(error)
+            if (!error?.message) {
+                setError('Unable to add course. Please try again.')
+            }
         }
     };
 
@@ -70,12 +81,18 @@ export default function Courses(){
             const data = await response.json()
 
             if(!response.ok){
-                throw new Error(data.error)
+                const message = data?.error || 'Unable to enroll in the course. Check if you are already enrolled in this course.'
+                setError(message)
+                throw new Error(message)
             }
 
+            setError('')
             setEnrolledCourses(data.enrolled_courses)
         }catch(error){
             console.error(error)
+            if (!error?.message) {
+                setError('Unable to enroll in the course. Please try again.')
+            }
         }
     }
 
@@ -89,12 +106,18 @@ export default function Courses(){
             const data = await response.json()
 
             if(!response.ok){
-                throw new Error(data.error)
+                const message = data?.error || 'Unable to remove the course. Please try again.'
+                setError(message)
+                throw new Error(message)
             }
 
+            setError('')
             setEnrolledCourses(data.enrolled_courses)
         }catch(error){
             console.error(error)
+            if (!error?.message) {
+                setError('Unable to remove the course. Please try again.')
+            }
         }
     }
 
@@ -103,7 +126,8 @@ export default function Courses(){
         <div className="courses-form-card">
             <h2>Add a Course</h2>
             <p className="courses-subtitle">Don't see your course? Add it to the list then enroll!</p>
-            <form className="course-form" action={handleCourseListSubmit}>
+            {error && <ErrorMessage message={error} />}
+            <form className="course-form" onSubmit={handleCourseListSubmit}>
                 <div className="course-grid">
                     <input placeholder="Course Code (ex. COP3330)" name="course_code" />
                     <input placeholder="Course Name" name="course_name" />

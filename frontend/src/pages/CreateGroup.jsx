@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react"
 import GroupLayout from "../components/GroupLayout"
+import ErrorMessage from "../components/ErrorMessage"
 
 export default function CreateGroup() {
     const [courseList, setCourseList] = useState([])
     const [createdGroups, setCreatedGroups] = useState([])
+    const [error, setError] = useState('')
 
-    async function createGroup(formData) {
+    async function createGroup(event) {
+        event.preventDefault()
+        setError('')
+
+        const formData = new FormData(event.target)
         try{
             const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/groups/create`, {
                 credentials: "include",
@@ -13,11 +19,18 @@ export default function CreateGroup() {
                 body: formData
             })
             const data = await response.json()
-            if(!response.ok) throw new Error(data.error)
+            if(!response.ok) {
+                const message = data?.error || 'Unable to create group. Please check your input.'
+                setError(message)
+                throw new Error(message)
+            }
             await getCreatedGroups()
             console.log(data.message)
         }catch(error){
             console.error(error)
+            if (!error?.message) {
+                setError('Unable to create group. Please try again.')
+            }
         }
     }
 
@@ -72,7 +85,8 @@ export default function CreateGroup() {
             <div className="courses-form-card">
                 <h2>Create a Study Group</h2>
                 <p className="courses-subtitle">Set up a new study group for your course — your classmates will be able to find and join it.</p>
-                <form className="course-form" action={createGroup}>
+                {error && <ErrorMessage message={error} />}
+                <form className="course-form" onSubmit={createGroup}>
                     <div className="create-group-grid">
                         <div className="create-group-field">
                             <label className="create-group-label" htmlFor="group-name">Group Name</label>
