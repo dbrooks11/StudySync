@@ -33,16 +33,9 @@ export default function JoinGroup() {
     }
 
     useEffect(() => {
-    // temporary debug
-    fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/groups/debug`, {
-        credentials: "include"
-    })
-    .then(r => r.json())
-    .then(data => console.log("DEBUG:", data))
-
-    fetchRecommendedGroups()
-    fetchAllGroups()
-}, []);
+        fetchRecommendedGroups()
+        fetchAllGroups()
+    }, []);
 
     async function joinGroup(groupId) {
         try{
